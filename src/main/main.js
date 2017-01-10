@@ -141,7 +141,7 @@ class Main extends React.Component {
 						key={ preset }>
 						{ C.PRESETS[preset] }
 					</button>);
-					presets.push(<div style={{ height: '0.5rem' }}/>);
+					presets.push(<div style={{ height: '0.5rem' }} key={ '-key-' + preset }/>);
 				}
 				return presets;
 			})()}
