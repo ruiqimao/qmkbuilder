@@ -160,7 +160,7 @@ class Action extends React.Component {
 						style={{ verticalAlign: 'baseLine' }}
 						className='light small'
 						onClick={ this.toggleSelector }>
-						{ Keycode.getDefault(argument).getName([]) }
+						{ Keycode.getDefault(argument).getName() }
 					</button>
 				</span>}
 			{ this.state.open && <Selector

@@ -35,7 +35,7 @@ class Template {
 
 		// Simple formatted string replacement.
 		for (let i = 0; i < this.fields.length; i ++) {
-			code = code.replace(new RegExp('%' + i, 'g'), fields[i]);
+			code = code.replace(new RegExp('%' + (i + 1), 'g'), fields[i]);
 		}
 
 		return code;
@@ -166,7 +166,7 @@ const keycodes = {
 	'KC_DEL': new Keycode('KC_DEL', 'DEL', ['DELETE']),
 	'KC_END': new Keycode('KC_END', 'END', []),
 	'KC_PGDN': new Keycode('KC_PGDN', 'PGDN', ['PAGE DOWN']),
-	'KC_RGHT': new Keycode('KC_RGTH', 'RIGHT', []),
+	'KC_RGHT': new Keycode('KC_RGHT', 'RIGHT', []),
 	'KC_LEFT': new Keycode('KC_LEFT', 'LEFT', []),
 	'KC_DOWN': new Keycode('KC_DOWN', 'DOWN', []),
 	'KC_UP': new Keycode('KC_UP', 'UP', []),

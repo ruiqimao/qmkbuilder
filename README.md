@@ -7,3 +7,7 @@ To set up the project for development, run `npm install` in the root of the proj
 ## Compiling
 
 To compile, run `npm run build`.
+
+## Deploying
+
+To deploy a production version of the application, run `npm run deploy`.

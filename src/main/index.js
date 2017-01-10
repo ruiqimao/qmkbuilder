@@ -16,8 +16,6 @@ class Index extends React.Component {
 	}
 
 	render() {
-		console.log(this.state);
-
 		// Assign the current screen.
 		let Screen;
 		if (this.state.screen === C.SCREEN_MAIN) {

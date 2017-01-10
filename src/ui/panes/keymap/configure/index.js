@@ -134,6 +134,7 @@ class Configure extends React.Component {
 			</button>
 			{
 				this.state.open && <Selector
+					style={{ width: '500px' }}
 					keycode={ keycode }
 					onChange={ this.change }
 					onClose={ this.toggleSelector }/>

@@ -108,7 +108,7 @@ class Selector extends React.Component {
 			}
 		}
 
-		return <div className='pane-keymap-selector'>
+		return <div className='pane-keymap-selector' style={ this.props.style }>
 			<div
 				className='pane-keymap-selector-close'
 				onClick={ this.props.onClose && this.props.onClose }>

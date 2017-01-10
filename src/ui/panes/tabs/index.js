@@ -59,6 +59,11 @@ class Tabs extends React.Component {
 				Macros
 			</Tab>
 			<Tab
+				selected={ screen === C.SCREEN_QUANTUM }
+				onClick={ this.switchTab(C.SCREEN_QUANTUM) }>
+				Quantum
+			</Tab>
+			<Tab
 				selected={ screen === C.SCREEN_SETTINGS }
 				onClick={ this.switchTab(C.SCREEN_SETTINGS) }>
 				Settings

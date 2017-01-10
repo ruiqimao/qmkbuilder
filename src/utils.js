@@ -32,7 +32,7 @@ class Utils {
 	/*
 	 * Read a text file.
 	 *
-	 * @param callback Function to call with the data.
+	 * @param {Function} callback Function to call with the data.
 	 */
 	static readFile(callback) {
 		// Create the file input object.
@@ -60,6 +60,51 @@ class Utils {
 
 		// Click the object.
 		input.click();
+	}
+
+	/*
+	 * Generate a filesystem friendly name.
+	 *
+	 * @param {String} name The name to convert.
+	 *
+	 * @return {String} The filesystem friendly name.
+	 */
+	static generateFriendly(name) {
+		return name.replace(/[^a-z0-9]/gi, '').toLowerCase();
+	}
+
+	/*
+	 * Left pad.
+	 *
+	 * @param {String} input The string to left pad.
+	 * @param {Number} length The length to be padded to.
+	 * @param {String?} pad The character to pad with. Defaults to space.
+	 *
+	 * @return The padded string.
+	 */
+	static leftPad(input, length, pad) {
+		pad = pad || ' ';
+		while (input.length < length) {
+			input = pad + input;
+		}
+		return input;
+	}
+
+	/*
+	 * Right pad.
+	 *
+	 * @param {String} input The string to right pad.
+	 * @param {Number} length The length to be padded to.
+	 * @param {String?} pad The character to pad with. Defaults to space.
+	 *
+	 * @return The padded string.
+	 */
+	static rightPad(input, length, pad) {
+		pad = pad || ' ';
+		while (input.length < length) {
+			input = input + pad;
+		}
+		return input;
 	}
 
 }

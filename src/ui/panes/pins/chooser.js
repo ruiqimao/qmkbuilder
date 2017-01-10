@@ -11,7 +11,7 @@ class Chooser extends React.Component {
 		const pin = this.props.pin || 'N/A';
 
 		// Get list of available pins.
-		const pins = C.PINS[keyboard.controller].slice();
+		const pins = this.props.backlight ? ['B5', 'B6', 'B7'] : C.PINS[keyboard.controller].slice(); // B5, B6, and B7 on backlight.
 
 		// Allow for no pin if set.
 		if (this.props.noPin) pins.splice(0, 0, null);

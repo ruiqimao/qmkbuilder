@@ -101,8 +101,8 @@ button.light:hover {
 }
 
 button.light:disabled {
-	background: #ffffff;
-	color: #888888;
+	background: #ffffff !important;
+	color: #888888 !important;
 	cursor: initial;
 }
 
@@ -704,6 +704,26 @@ select {
 	background: rgba(0, 0, 0, 0.1);
 }
 
+
+.pane-quantum {
+	padding: 1rem 0;
+	text-align: center;
+}
+
+.pane-quantum-editor {
+	display: inline-block;
+	width: 600px;
+	text-align: left;
+	border: 1px solid #dddddd;
+	border-radius: 0.2rem;
+	overflow: hidden;
+}
+
+.pane-quantum-editor .CodeMirror {
+	height: 400px;
+}
+
+
 .pane-settings {
 	padding: 1rem 0;
 	text-align: center;
@@ -740,7 +760,18 @@ select {
 	border: none;
 }
 
+
 .pane-compile {
 	padding: 1rem 0;
 	text-align: center;
+}
+
+
+.footer {
+	text-align: center;
+	font-family:Lato;
+	font-size:0.9rem;
+	line-height:1.5rem;
+	color:#444444;
+	margin:2rem 0;
 }

@@ -1,4 +1,6 @@
-const keycodes = require('./keycodes');
+const Keycodes = require('./keycodes');
+const Presets = require('./presets');
+const Local = require('./local');
 
 const C = {
 
@@ -11,8 +13,9 @@ const C = {
 	SCREEN_PINS:     2,
 	SCREEN_KEYMAP:   3,
 	SCREEN_MACROS:   4,
-	SCREEN_SETTINGS: 5,
-	SCREEN_COMPILE:  6,
+	SCREEN_QUANTUM:  5,
+	SCREEN_SETTINGS: 6,
+	SCREEN_COMPILE:  7,
 
 	// Display properties.
 	KEY_SIZE: 60,
@@ -58,13 +61,13 @@ const C = {
 	},
 
 	// Keycodes.
-	KEYCODES: keycodes.KEYCODES,
-	KEYCODE_ALIASES: keycodes.ALIASES,
-	KEYCODE_CATEGORIES: keycodes.CATEGORIES,
-	KEYCODE_REVERSE_CATEGORIES: keycodes.REVERSE_CATEGORIES,
-	KEYCODE_NUMBERS: keycodes.NUMBERS,
-	KEYCODE_SPECIAL: keycodes.SPECIAL,
-	KEYCODE_RECOMMENDED: keycodes.RECOMMENDED,
+	KEYCODES: Keycodes.KEYCODES,
+	KEYCODE_ALIASES: Keycodes.ALIASES,
+	KEYCODE_CATEGORIES: Keycodes.CATEGORIES,
+	KEYCODE_REVERSE_CATEGORIES: Keycodes.REVERSE_CATEGORIES,
+	KEYCODE_NUMBERS: Keycodes.NUMBERS,
+	KEYCODE_SPECIAL: Keycodes.SPECIAL,
+	KEYCODE_RECOMMENDED: Keycodes.RECOMMENDED,
 
 	// Keymap.
 	KEYMAP_MAX_LAYERS: 16,
@@ -77,10 +80,29 @@ const C = {
 	MACRO_TYPE:     4,
 	MACRO_WAIT:     5,
 
+	// Quantum.
+	QUANTUM_DEFAULT: `
+void matrix_init_user(void) {
+}
+
+void matrix_scan_user(void) {
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	return true;
+}`.trim(),
+
 	// Bootloader sizes.
 	BOOTLOADER_512: 0,
 	BOOTLOADER_2048: 1,
-	BOOTLOADER_4096: 2
+	BOOTLOADER_4096: 2,
+	BOOTLOADER_8192: 3,
+
+	// Presets.
+	PRESETS: Presets,
+
+	// Local settings.
+	LOCAL: Local
 
 };
 

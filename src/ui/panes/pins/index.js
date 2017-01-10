@@ -18,7 +18,7 @@ class Pins extends React.Component {
 			<select
 				style={{ width: '10rem' }}
 				value={ keyboard.controller }
-				onChange={ e => keyboard.controller = e.target.value }>
+				onChange={ e => keyboard.controller = parseInt(e.target.value) }>
 				<option value={ C.CONTROLLER_ATMEGA32U2 }>ATmega32U2</option>
 				<option value={ C.CONTROLLER_ATMEGA32U4 }>ATmega32U4</option>
 				<option value={ C.CONTROLLER_AT90USB1286 }>AT90USB1286</option>
@@ -78,6 +78,13 @@ class Pins extends React.Component {
 			<div style={{ height: '1.5rem' }}/>
 			Configure LED pins.
 			<div style={{ height: '0.5rem' }}/>
+			<h2 style={{ width: '6rem', marginRight: '0.8rem' }}>Num Lock</h2>
+			<Chooser
+				noPin
+				state={ state }
+				onChange={ p => keyboard.setPin('num', p) }
+				pin={ keyboard.pins.num }/>
+			<div style={{ height: '0.5rem' }}/>
 			<h2 style={{ width: '6rem', marginRight: '0.8rem' }}>Caps Lock</h2>
 			<Chooser
 				noPin
@@ -92,16 +99,24 @@ class Pins extends React.Component {
 				onChange={ p => keyboard.setPin('scroll', p) }
 				pin={ keyboard.pins.scroll }/>
 			<div style={{ height: '0.5rem' }}/>
-			<h2 style={{ width: '6rem', marginRight: '0.8rem' }}>Num Lock</h2>
+			<h2 style={{ width: '6rem', marginRight: '0.8rem' }}>Compose</h2>
 			<Chooser
 				noPin
 				state={ state }
-				onChange={ p => keyboard.setPin('num', p) }
-				pin={ keyboard.pins.num }/>
+				onChange={ p => keyboard.setPin('compose', p) }
+				pin={ keyboard.pins.compose }/>
+			<div style={{ height: '0.5rem' }}/>
+			<h2 style={{ width: '6rem', marginRight: '0.8rem' }}>Kana</h2>
+			<Chooser
+				noPin
+				state={ state }
+				onChange={ p => keyboard.setPin('kana', p) }
+				pin={ keyboard.pins.kana }/>
 			<div style={{ height: '0.5rem' }}/>
 			<h2 style={{ width: '6rem', marginRight: '0.8rem' }}>Backlight</h2>
 			<Chooser
 				noPin
+				backlight
 				state={ state }
 				onChange={ p => keyboard.setPin('led', p) }
 				pin={ keyboard.pins.led }/>

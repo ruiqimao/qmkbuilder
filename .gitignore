@@ -1,3 +1,6 @@
 .*.swp
 
 node_modules
+
+bundle.js
+local.json

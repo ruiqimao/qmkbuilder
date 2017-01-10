@@ -25,17 +25,22 @@ class Keyboard {
 		this.pins = {
 			row: [],
 			col: [],
+			num: null,
 			caps: null,
 			scroll: null,
-			num: null,
+			compose: null,
+			kana: null,
 			led: null,
 			rgb: null
 		};
 		this.macros = {};
+		this.quantum = C.QUANTUM_DEFAULT;
 		this.settings = {
 			diodeDirection: C.DIODE_COL2ROW,
 			name: '',
-			bootloaderSize: C.BOOTLOADER_4096
+			bootloaderSize: C.BOOTLOADER_4096,
+			rgbNum: 0,
+			backlightLevels: 3
 		};
 
 		this.valid = false;
@@ -330,12 +335,16 @@ class Keyboard {
 			if (usedPins.includes(pin)) this.valid = overlappingPins = false;
 			usedPins.push(pin);
 		}
+		if (this.pins.num && usedPins.includes(this.pins.num)) this.valid = overlappingPins = false;
+		usedPins.push(this.pins.num);
 		if (this.pins.caps && usedPins.includes(this.pins.caps)) this.valid = overlappingPins = false;
 		usedPins.push(this.pins.caps);
 		if (this.pins.scroll && usedPins.includes(this.pins.scroll)) this.valid = overlappingPins = false;
 		usedPins.push(this.pins.scroll);
-		if (this.pins.num && usedPins.includes(this.pins.num)) this.valid = overlappingPins = false;
-		usedPins.push(this.pins.num);
+		if (this.pins.compose && usedPins.includes(this.pins.compose)) this.valid = overlappingPins = false;
+		usedPins.push(this.pins.compose);
+		if (this.pins.kana && usedPins.includes(this.pins.kana)) this.valid = overlappingPins = false;
+		usedPins.push(this.pins.kana);
 		if (this.pins.led && usedPins.includes(this.pins.led)) this.valid = overlappingPins = false;
 		usedPins.push(this.pins.led);
 		if (this.pins.rgb && usedPins.includes(this.pins.rgb)) this.valid = overlappingPins = false;
@@ -354,7 +363,7 @@ class Keyboard {
 		const missing = [];
 		for (const recommended of C.KEYCODE_RECOMMENDED) {
 			if (!inKeymap.has(recommended)) {
-				missing.push(Keycode.getDefault(recommended).getName([]));
+				missing.push(Keycode.getDefault(recommended).getName());
 			}
 		}
 		if (missing.length) this.warnings.push('Your keymap is missing the key' + (missing.length > 1 ? 's' : '')  + ': ' + missing.join(', ') + '.');
@@ -424,6 +433,7 @@ class Keyboard {
 		const cols = this.cols;
 		const pins = this.pins;
 		const macros = this.macros;
+		const quantum = this.quantum;
 		const settings = this.settings;
 
 		// Return JSON representation.
@@ -435,6 +445,7 @@ class Keyboard {
 			'cols': cols,
 			'pins': pins,
 			'macros': macros,
+			'quantum': quantum,
 			'settings': settings
 		};
 
@@ -461,6 +472,7 @@ class Keyboard {
 		const cols = serialized.cols;
 		const pins = serialized.pins;
 		const macros = serialized.macros;
+		const quantum = serialized.quantum;
 		const settings = serialized.settings;
 
 		keyboard.keys = keys;
@@ -470,6 +482,7 @@ class Keyboard {
 		keyboard._cols = cols;
 		keyboard.pins = pins;
 		keyboard.macros = macros;
+		keyboard.quantum = quantum;
 		keyboard.settings = settings;
 
 		keyboard.updateWiring();

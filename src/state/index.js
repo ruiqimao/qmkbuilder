@@ -33,7 +33,6 @@ class State {
 	 * @param {String} msg The error message to display.
 	 */
 	error(msg) {
-		// TODO: Properly implement.
 		alert(msg);
 	}
 
@@ -43,7 +42,6 @@ class State {
 	 * @param {String} msg The message to display.
 	 */
 	message(msg) {
-		// TODO: Properly implement.
 		alert(msg);
 	}
 
