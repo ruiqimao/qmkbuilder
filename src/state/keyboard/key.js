@@ -190,7 +190,7 @@ class Key {
 		const layers = [];
 		for (let i = 0; i < legends.length; i++) {
 			const layer = indexToLayer[i];
-			if (layer)
+			if (layer != undefined)
 				layers[layer] = legends[i];
 		}
 
@@ -202,8 +202,8 @@ class Key {
 			if (strictMode)
 				this.keycodes[0] = new Keycode('KC_NO', []);
 			else {
-				// Assign KC_SPACE if blank.
-				this.keycodes[0] = new Keycode('KC_SPACE', []);
+				// Assign SPACE if blank.
+				this.keycodes[0] = new Keycode('KC_SPC', []);
 			}
 		}
 
