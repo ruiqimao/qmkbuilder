@@ -31,6 +31,9 @@ class KeyboardH extends Generator {
 					}
 				}
 
+				if (row === keyboard.rows - 1) {
+					rowString = rowString.replace(/,[ ]*?$/, ', ');
+				}
 				result += '\t' + rowString + '\\\n';
 			}
 
