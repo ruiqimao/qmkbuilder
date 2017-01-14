@@ -147,26 +147,26 @@ class Key {
 		const legends = this.legend.split('\n');
 
 		// Simple case with zero or one legends.
-		if (!strictMode && Key.countTruthy(legends) <= 1) {
+		if (!strictMode && Utils.countTruthy(legends) <= 1) {
 			const legend = legends[legends.length - 1];
 			this.keycodes[0] = Key.legendToKeycode(legend, 'KC_NO');
 			return;
 		}
 
-		// See https://github.com/ijprest/keyboard-layout-editor/wiki/Serialized-Data-Format
+		// See https://github.com/ijprest/keyboard-layout-editor/wiki/Serialized-Data-Format.
 		const positionToIndex = {
-			"top left": 0,
-			"bottom left": 1,
-			"top right": 2,
-			"bottom right": 3,
-			"front left": 4,
-			"front right": 5,
-			"center left": 6,
-			"center right": 7,
-			"top center": 8,
-			"center": 9,
-			"bottom center": 10,
-			"front center": 11
+			'top left': 0,
+			'bottom left': 1,
+			'top right': 2,
+			'bottom right': 3,
+			'front left': 4,
+			'front right': 5,
+			'center left': 6,
+			'center right': 7,
+			'top center': 8,
+			'center': 9,
+			'bottom center': 10,
+			'front center': 11
 		};
 
 		/*
@@ -177,37 +177,36 @@ class Key {
 		 center			  0
 		 bottom	  2
 		 front
-
-		 TODO: Make this configurable by the user.
 		 */
 		const indexToLayer = [];
-		indexToLayer[positionToIndex["center"]] = 0;
-		indexToLayer[positionToIndex["top right"]] = 1;
-		indexToLayer[positionToIndex["bottom left"]] = 2;
+		indexToLayer[positionToIndex['center']] = 0;
+		indexToLayer[positionToIndex['top right']] = 1;
+		indexToLayer[positionToIndex['bottom left']] = 2;
 
 		// layers has the same elements as legends but in such an order that the index of a legend is equal to the
 		// layer it is to be assigned to.
 		const layers = [];
 		for (let i = 0; i < legends.length; i++) {
 			const layer = indexToLayer[i];
-			if (layer != undefined)
+			if (layer != undefined) {
 				layers[layer] = legends[i];
+			}
 		}
 
-		// base layer
+		// Base layer, using 'KC_NO' as a fallback.
 		const legend = layers[0];
 		if (legend) {
 			this.keycodes[0] = Key.legendToKeycode(legend, 'KC_NO');
 		} else {
-			if (strictMode)
+			if (strictMode) {
 				this.keycodes[0] = new Keycode('KC_NO', []);
-			else {
+			} else {
 				// Assign SPACE if blank.
 				this.keycodes[0] = new Keycode('KC_SPC', []);
 			}
 		}
 
-		// higher layers
+		// Higher layers, using 'KC_TRNS' as a fallback.
 		for (let i = 1; i < layers.length; i++) {
 			const legend = layers[i];
 			if (legend) {
@@ -217,32 +216,20 @@ class Key {
 	}
 
 	/**
-	 * Counts the number of truthy values in arr.
-	 * @param {Array} arr The array to count.
-	 * @returns {Number} The number of truthy values in arr.
-	 */
-	static countTruthy(arr) {
-		return arr.reduce(function(count, value) {
-			if (value)
-				return count + 1;
-			else
-				return count;
-		}, 0);
-	}
-
-	/**
 	 * Returns a new keycode object corresponding to legend, or if no such keycode can be found, one corresponsing to
 	 * fallback.
 	 *
 	 * @param {String} legend The legend to which a keycode should be found.
-	 * @param {String} fallback A string specifing the fallback keycode (e.g. "KC_NO" or "KC_TRNS").
+	 * @param {String} fallback A string specifing the fallback keycode (e.g. 'KC_NO' or 'KC_TRNS').
+	 * @return {Keycode} The newly constructed keycode.
 	 */
 	static legendToKeycode(legend, fallback) {
 		const keycode = C.KEYCODE_ALIASES[legend.toUpperCase()];
-		if (keycode)
+		if (keycode) {
 			return new Keycode(keycode.template.raw[0], []);
-		else
+		} else {
 			return new Keycode(fallback, []);
+		}
 	}
 
 	/*
