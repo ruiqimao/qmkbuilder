@@ -40,7 +40,9 @@ class Keyboard {
 			name: '',
 			bootloaderSize: C.BOOTLOADER_4096,
 			rgbNum: 0,
-			backlightLevels: 3
+			backlightLevels: 3,
+			positionIndexToLayerMap: [],
+			strictLayers: false
 		};
 
 		this.valid = false;
@@ -64,6 +66,10 @@ class Keyboard {
 		this.serialize = this.serialize.bind(this);
 
 		this.deselect = this.deselect.bind(this);
+
+		this.setLayer = this.setLayer.bind(this);
+		this.getLayer = this.getLayer.bind(this);
+		this.updateLayers = this.updateLayers.bind(this);
 
 		// Import KLE if it exists.
 		if (json) this.importKLE(json);
@@ -406,6 +412,37 @@ class Keyboard {
 		this.settings[id] = value;
 
 		// Update the state.
+		this.state.update();
+	}
+
+	getLayer(position) {
+		const positionIndex = C.POSITION_TO_INDEX[position];
+		return this.settings.positionIndexToLayerMap[positionIndex];
+	}
+
+	/**
+	 * Maps the supplied legend position to the supplied layer.
+	 *
+	 * @param {String} position The legend position to be mapped.
+	 * @param {Number} layer The layer the position should be mapped to.
+	 */
+	setLayer(position, layer) {
+		const positionIndex = C.POSITION_TO_INDEX[position];
+		if (isNaN(layer)) {
+			this.settings.positionIndexToLayerMap[positionIndex] = undefined;
+		} else {
+			this.settings.positionIndexToLayerMap[positionIndex] = layer;
+		}
+
+		this.state.update();
+	}
+
+	updateLayers() {
+		for (const key of this.keys) {
+			key.guessLegend();
+		}
+		this.verify();
+
 		this.state.update();
 	}
 

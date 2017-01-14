@@ -22,7 +22,7 @@ class Key {
 
 		this.selected = 0;
 
-		this.keycodes = Array(C.KEYMAP_MAX_LAYERS).fill(new Keycode('KC_TRNS', []));
+		this.keycodes = new Array(C.KEYMAP_MAX_LAYERS);
 
 		// Bind functions.
 		this.guessLegend = this.guessLegend.bind(this);
@@ -142,46 +142,21 @@ class Key {
 		 This allows for keys that are inactive on the base layer but SPACE needs to be specified explicitly.
 		*/
 
-		const strictMode = false;
+		this.keycodes.fill(new Keycode('KC_TRNS', []));
+
+		const strictMode = this.keyboard.settings.strictLayers;
 
 		const legends = this.legend.split('\n');
 
-		// Simple case with zero or one legends.
-		if (!strictMode && Utils.countTruthy(legends) <= 1) {
+		const indexToLayer = this.keyboard.settings.positionIndexToLayerMap;
+		const isLayerMapDefined = indexToLayer.some(v => { return v != undefined });
+
+		// Simple case with zero or one legends or default behavior with no layer map.
+		if (!isLayerMapDefined || Utils.countTruthy(legends) <= 1) {
 			const legend = legends[legends.length - 1];
 			this.keycodes[0] = Key.legendToKeycode(legend, 'KC_NO');
 			return;
 		}
-
-		// See https://github.com/ijprest/keyboard-layout-editor/wiki/Serialized-Data-Format.
-		const positionToIndex = {
-			'top left': 0,
-			'bottom left': 1,
-			'top right': 2,
-			'bottom right': 3,
-			'front left': 4,
-			'front right': 5,
-			'center left': 6,
-			'center right': 7,
-			'top center': 8,
-			'center': 9,
-			'bottom center': 10,
-			'front center': 11
-		};
-
-		/*
-		 The following maps the positions to the following layers:
-
-		 		left   center	right
-		 top					  1
-		 center			  0
-		 bottom	  2
-		 front
-		 */
-		const indexToLayer = [];
-		indexToLayer[positionToIndex['center']] = 0;
-		indexToLayer[positionToIndex['top right']] = 1;
-		indexToLayer[positionToIndex['bottom left']] = 2;
 
 		// layers has the same elements as legends but in such an order that the index of a legend is equal to the
 		// layer it is to be assigned to.

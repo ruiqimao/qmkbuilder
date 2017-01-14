@@ -72,6 +72,22 @@ const C = {
 	// Keymap.
 	KEYMAP_MAX_LAYERS: 16,
 
+	// KLE legend position indices (see https://github.com/ijprest/keyboard-layout-editor/wiki/Serialized-Data-Format).
+	POSITION_TO_INDEX: {
+		'top left': 0,
+		'bottom left': 1,
+		'top right': 2,
+		'bottom right': 3,
+		'front left': 4,
+		'front right': 5,
+		'center left': 6,
+		'center right': 7,
+		'top center': 8,
+		'center': 9,
+		'bottom center': 10,
+		'front center': 11
+	},
+
 	// Macros.
 	MACRO_NONE:     0,
 	MACRO_INTERVAL: 1,

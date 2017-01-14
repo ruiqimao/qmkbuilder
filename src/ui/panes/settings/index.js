@@ -1,6 +1,7 @@
 const React = require('react');
 
 const NumberBox = require('ui/elements/numberbox');
+const LayerBox = require('ui/elements/layerbox');
 const Help = require('ui/elements/help');
 
 const C = require('const');
@@ -129,6 +130,115 @@ class Settings extends React.Component {
 			<Help>
 				The number of backlight levels.
 			</Help>
+			<div style={{ height: '1.5rem' }}/>
+			<h2>Legend-to-layer mapping</h2>
+			<Help>
+				Select which layer the legends in each position should be mapped to. Only affects keys with multiple
+				legends.
+			</Help>
+			<div style={{ height: '0.5rem' }}/>
+			<table style={{ display: 'inline-block' }}>
+				<tbody>
+				<tr>
+					<th>&nbsp;</th>
+					<th>left</th>
+					<th>center</th>
+					<th>right</th>
+				</tr>
+				<tr>
+					<th>top</th>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('top left') }
+							onChange={ v => keyboard.setLayer('top left', v) }/>
+					</td>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('top center') }
+							onChange={ v => keyboard.setLayer('top center', v) }/>
+					</td>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('top right') }
+							onChange={ v => keyboard.setLayer('top right', v) }/>
+					</td>
+				</tr>
+				<tr>
+					<th>center</th>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('center left') }
+							onChange={ v => keyboard.setLayer('center left', v) }/>
+					</td>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('center') }
+							onChange={ v => keyboard.setLayer('center', v) }/>
+					</td>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('center right') }
+							onChange={ v => keyboard.setLayer('center right', v) }/>
+					</td>
+				</tr>
+				<tr>
+					<th>bottom</th>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('bottom left') }
+							onChange={ v => keyboard.setLayer('bottom left', v) }/>
+					</td>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('bottom center') }
+							onChange={ v => keyboard.setLayer('bottom center', v) }/>
+					</td>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('bottom right') }
+							onChange={ v => keyboard.setLayer('bottom right', v) }/>
+					</td>
+				</tr>
+				<tr>
+					<th>front</th>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('front left') }
+							onChange={ v => keyboard.setLayer('front left', v) }/>
+					</td>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('front center') }
+							onChange={ v => keyboard.setLayer('front center', v) }/>
+					</td>
+					<td>
+						<LayerBox
+							value={ keyboard.getLayer('front right') }
+							onChange={ v => keyboard.setLayer('front right', v) }/>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<div style={{ height: '0.5rem' }}/>
+			<input
+				type='checkbox'
+				checked={ keyboard.settings.strictLayers }
+			/>
+			<label
+				onClick={ () => { keyboard.settings.strictLayers = !keyboard.settings.strictLayers; state.update(); } }>
+				Use strict mode.
+			</label>
+			<Help>
+				In strict mode, 'KC_NO' is assigned to keys with no legend for the base layer. In strict mode, the space
+				bar needs to be specified explicitly by adding the legend 'Space'.
+			</Help>
+			<div style={{ height: '0.5rem' }}/>
+			<button onClick={ keyboard.updateLayers }>
+				Update keymap
+			</button>
+			<span style={{ marginLeft: '0.8rem' }}>
+				(resets manual changes)
+			</span>
 			<div style={{ height: '1.5rem' }}/>
 			Save your layout.
 			<div style={{ height: '0.5rem' }}/>
