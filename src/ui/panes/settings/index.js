@@ -131,7 +131,9 @@ class Settings extends React.Component {
 				The number of backlight levels.
 			</Help>
 			<div style={{ height: '1.5rem' }}/>
-			<h2>Legend-to-layer mapping</h2>
+			<h2 style={{ width: '16.8rem', textAlign: 'center' }}>
+				Legend-to-layer mapping
+			</h2>
 			<Help>
 				Select which layer the legends in each position should be mapped to. Only affects keys with multiple
 				legends.
@@ -220,25 +222,27 @@ class Settings extends React.Component {
 				</tbody>
 			</table>
 			<div style={{ height: '0.5rem' }}/>
-			<input
-				type='checkbox'
-				checked={ keyboard.settings.strictLayers }
-			/>
-			<label
-				onClick={ () => { keyboard.settings.strictLayers = !keyboard.settings.strictLayers; state.update(); } }>
-				Use strict mode.
-			</label>
+			<div style={{ width: '16.8rem', textAlign: 'center', display: 'inline-block' }}>
+				<input
+					type='checkbox'
+					checked={ keyboard.settings.strictLayers }
+				/>
+				<label
+					onClick={ () => { keyboard.settings.strictLayers = !keyboard.settings.strictLayers; state.update(); } }>
+					Use strict mode.
+				</label>
+			</div>
 			<Help>
 				In strict mode, 'KC_NO' is assigned to keys with no legend for the base layer. In strict mode, the space
 				bar needs to be specified explicitly by adding the legend 'Space'.
 			</Help>
 			<div style={{ height: '0.5rem' }}/>
+			Apply the above mapping <br/>
+			(resets manual changes to keymap)
+			<div style={{ height: '0.5rem' }}/>
 			<button onClick={ keyboard.updateLayers }>
-				Update keymap
+				Regenerate keymap
 			</button>
-			<span style={{ marginLeft: '0.8rem' }}>
-				(resets manual changes)
-			</span>
 			<div style={{ height: '1.5rem' }}/>
 			Save your layout.
 			<div style={{ height: '0.5rem' }}/>

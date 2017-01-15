@@ -415,9 +415,19 @@ class Keyboard {
 		this.state.update();
 	}
 
+	/**
+	 * Gets the layer the supplied position is currently mapped to.
+	 * @param {String} position The position for which the layer should be retrieved.
+	 * @return {*} The layer the position is mapped to or the empty string if the position is not mapped.
+	 */
 	getLayer(position) {
 		const positionIndex = C.POSITION_TO_INDEX[position];
-		return this.settings.positionIndexToLayerMap[positionIndex];
+		const layer = this.settings.positionIndexToLayerMap[positionIndex];
+		if (layer != undefined) {
+			return layer;
+		} else {
+			return '';
+		}
 	}
 
 	/**
@@ -437,9 +447,12 @@ class Keyboard {
 		this.state.update();
 	}
 
+	/**
+	 * Regenerates all keycodes according to key legends and verifies this keyboard.
+	 */
 	updateLayers() {
 		for (const key of this.keys) {
-			key.guessLegend();
+			key.guessKeycodes();
 		}
 		this.verify();
 

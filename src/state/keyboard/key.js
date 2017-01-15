@@ -25,7 +25,7 @@ class Key {
 		this.keycodes = new Array(C.KEYMAP_MAX_LAYERS);
 
 		// Bind functions.
-		this.guessLegend = this.guessLegend.bind(this);
+		this.guessKeycodes = this.guessKeycodes.bind(this);
 		this.select = this.select.bind(this);
 		this.serialize = this.serialize.bind(this);
 
@@ -105,7 +105,7 @@ class Key {
 		this._col = 0;
 
 		// Guess the legend.
-		this.guessLegend();
+		this.guessKeycodes();
 	}
 
 	/*
@@ -127,9 +127,9 @@ class Key {
 	}
 
 	/*
-	 * Guess the legend of the key.
+	 * Guess the keycode of the key using the key's legends and the current legend-to-layer map.
 	 */
-	guessLegend() {
+	guessKeycodes() {
 		/*
 		 No legends = SPACE on l0 and TRNS on others
 		 Only one legend = assign l0, TRNS on others

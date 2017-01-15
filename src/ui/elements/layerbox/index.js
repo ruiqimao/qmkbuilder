@@ -39,7 +39,7 @@ class LayerBox extends React.Component {
 	render() {
 		return <div className='layerbox'>
 			<input
-				style={{ width: '2rem' }}
+				style={{ width: '2rem', textAlign: 'center' }}
 				type='text'
 				value={ this.props.value }
 				onChange={ this.onChange }/>
