@@ -13,5 +13,4 @@ module.exports = {
 	'alps44': 'Alps44',
 	'miuni32-1u-spc': 'Miuni32 RGB (1U-SPC)'
 	'miuni32-2u-v-spc-b': 'Miuni32 RGB (2U-V-SPC-B)'
-	'miuni32-2u-vb-spc': 'Miuni32 RGB (2U-VB-SPC)'
 };
