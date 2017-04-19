@@ -39,7 +39,7 @@ class Keymap extends React.Component {
 								key={ selected.id }/>
 						</div>
 						<br/><br/>
-						Read the <a href='https://github.com/jackhumbert/qmk_firmware/wiki' target='_blank'>QMK Wiki</a> for an explanation of all the keycodes.
+						Read the <a href='https://github.com/qmk/qmk_firmware/wiki/Keycodes' target='_blank'>QMK Wiki</a> for an explanation of all the keycodes.
 					</div>;
 				} else {
 					return <h5>No key selected</h5>;
