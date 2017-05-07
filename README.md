@@ -7,7 +7,7 @@ To set up the project for development, run `npm install` in the root of the proj
 Create a `local.json` file in `src/const`, in the format:
 
     {
-	    "API": "URL to server /build route",
+		"API": "URL to server /build route",
 		"PRESETS": "URL to static/presets folder"
 	}
 
