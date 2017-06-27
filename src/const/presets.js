@@ -11,5 +11,6 @@ module.exports = {
 	'jd45-default': 'JD45',
 	'bantam-pcb': 'Bantam44 (PCB)',
 	'alps44': 'Alps44',
-	'miuni32-rgb-standard': 'Miuni32 RGB (Standard)'
+	'miuni32-1u-spc': 'Miuni32 RGB (1U-SPC)'
+	'miuni32-2u-v-spc-b': 'Miuni32 RGB (2U-V-SPC-B)'
 };
