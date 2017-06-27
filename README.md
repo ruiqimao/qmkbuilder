@@ -1,4 +1,4 @@
-# QMK Builder
+# Keyboard Firmware Builder
 
 ## Setup
 
