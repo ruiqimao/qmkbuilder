@@ -326,7 +326,7 @@ const keycodes = {
 	'RGB_VAI': new Keycode('RGB_VAI', 'RGB_VAI', []),
 	'RGB_VAD': new Keycode('RGB_VAD', 'RGB_VAD', []),
 	'KC_LSPO': new Keycode('KC_LSPO', 'LSPO', []),
-	'KC_RSPO': new Keycode('KC_RSPO', 'RSPO', []),
+	'KC_RSPC': new Keycode('KC_RSPC', 'RSPC', []),
 	'KC_TILD': new Keycode('KC_TILD', '~', ['TILDE']),
 	'KC_EXLM': new Keycode('KC_EXLM', '!', []),
 	'KC_AT': new Keycode('KC_AT', '@', []),
