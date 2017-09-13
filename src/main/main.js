@@ -168,7 +168,7 @@ class Main extends React.Component {
 		const state = this.props.state;
 
 		return <div>
-			<h3>Upload QMK Firmware Builder configuration</h3>
+			<h3>Upload Keyboard Firmware Builder configuration</h3>
 			<button
 				className='block'
 				onClick={ this.upload }>

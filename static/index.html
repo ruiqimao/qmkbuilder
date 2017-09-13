@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>QMK Firmware Builder</title>
+		<title>Keyboard Firmware Builder</title>
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/codemirror.css" rel="stylesheet">
 		<link href="css/main.css" rel="stylesheet">
@@ -12,9 +12,11 @@
 		<div id="content"></div>
 
 		<div class="footer">
-			QMK Firmware Builder by <a href="http://www.ruiqimao.com/" target="_blank">Ruiqi Mao</a>
+			Keyboard Firmware Builder by <a href="http://www.ruiqimao.com/" target="_blank">Ruiqi Mao</a>
 			<br>
-			QMK Firmware by <a href="https://github.com/jackhumbert" target="_blank">Jack Humbert</a>
+			<a href="https://github.com/qmk/qmk_firmware" target="_blank">QMK Firmware</a> by <a href="https://github.com/jackhumbert" target="_blank">Jack Humbert</a>
+			<br><br>
+			<b>Keyboard Firmware Builder is not officially related to QMK Firmware.<br>This is purely a third-party tool using QMK as its firmware base.</b>
 			<br><br>
 			Contribute on <a href="https://github.com/ruiqimao/qmkbuilder" target="_blank">Github</a>!
 			<br><br>
@@ -41,5 +43,17 @@
 
 		<!-- REACT -->
 		<script src="js/bundle.js"></script>
+
+		<!-- GOOGLE ANALYTICS -->
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-101160419-1', 'auto');
+			ga('send', 'pageview');
+		</script>
+
 	</body>
 </html>

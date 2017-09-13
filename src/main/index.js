@@ -26,7 +26,7 @@ class Index extends React.Component {
 
 		return <div>
 			<div className='header'>
-				QMK Firmware Builder
+				Keyboard Firmware Builder
 			</div>
 			<Screen
 				state={ this.state }/>
