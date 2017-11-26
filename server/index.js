@@ -45,7 +45,7 @@ app.post('/build', (req, res) => {
 		// Copy the base stencil.
 		yield new Promise((resolve, reject) => {
 			Exec('cp -rp qmk_firmware ' + TMP + key, (err, stdout, stderr) => {
-				if (err) return reject('Failed to initialize.');
+				if (err) return reject(err);
 				resolve();
 			});
 		});

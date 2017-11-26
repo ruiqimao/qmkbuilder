@@ -129,6 +129,7 @@ const keycodes = {
 	'KC_0': new Keycode('KC_0', '0', []),
 	'KC_ENT': new Keycode('KC_ENT', 'ENTER', ['RETURN']),
 	'KC_ESC': new Keycode('KC_ESC', 'ESC', ['ESCAPE']),
+    'KC_GESC': new Keycode('KC_GESC', 'G_ESC', ['GRAVE ESCAPE']),
 	'KC_BSPC': new Keycode('KC_BSPC', 'BACKSPACE', ['BS', 'BACK SPACE', 'BACK<BR>SPACE']),
 	'KC_TAB': new Keycode('KC_TAB', 'TAB', []),
 	'KC_SPC': new Keycode('KC_SPC', 'SPACE', ['']),
@@ -189,7 +190,7 @@ const keycodes = {
 	'KC_PDOT': new Keycode('KC_PDOT', 'P.', []),
 	'KC_NUBS': new Keycode('KC_NUBS', 'NUBS', []),
 	'KC_APP': new Keycode('KC_APP', 'APP', []),
-	'KC_POWER': new Keycode('KC_POWER', '_POWER', []),
+	'KC_POWER': new Keycode('KC_POWER', 'POWER', []),
 	'KC_PEQL': new Keycode('KC_PEQL', 'P=', []),
 	'KC_F13': new Keycode('KC_F13', 'F13', []),
 	'KC_F14': new Keycode('KC_F14', 'F14', []),
@@ -263,6 +264,12 @@ const keycodes = {
 	'KC_PWR': new Keycode('KC_PWR', 'POWER', []),
 	'KC_SLEP': new Keycode('KC_SLEP', 'SLEEP', []),
 	'KC_WAKE': new Keycode('KC_WAKE', 'WAKE', []),
+    'KC_COPY': new Keycode('KC_COPY', 'COPY', []),
+    'KC_PAST': new Keycode('KC_PAST', 'PASTE', []),
+    'KC_MENU': new Keycode('KC_MENU', 'MENU', []),
+    'KC_EXECUTE': new Keycode('KC_EXECUTE', 'EXECUTE', []),
+    'KC_LSPO': new Keycode('KC_LSPO', 'LSPO', []),
+    'KC_RSPC': new Keycode('KC_RSPC', 'RSPC', []),
 	'KC_MUTE': new Keycode('KC_MUTE', 'MUTE', []),
 	'KC_VOLU': new Keycode('KC_VOLU', 'VOLU', ['VOLUME UP']),
 	'KC_VOLD': new Keycode('KC_VOLD', 'VOLD', ['VOLUME DOWN']),
@@ -325,6 +332,8 @@ const keycodes = {
 	'RGB_SAD': new Keycode('RGB_SAD', 'RGB_SAD', []),
 	'RGB_VAI': new Keycode('RGB_VAI', 'RGB_VAI', []),
 	'RGB_VAD': new Keycode('RGB_VAD', 'RGB_VAD', []),
+    'KC_MFFD': new Keycode('KC_MFFD', 'FFWD', []),
+    'KC_MRWD': new Keycode('KC_MRWD', 'RWD', []),
 	'KC_LSPO': new Keycode('KC_LSPO', 'LSPO', []),
 	'KC_RSPC': new Keycode('KC_RSPC', 'RSPC', []),
 	'KC_TILD': new Keycode('KC_TILD', '~', ['TILDE']),
@@ -367,6 +376,7 @@ const keycodes = {
 	'LT()': new Keycode(new Template(['LT', 'LAYER', 'KEY'], 'LT(%1, %2)'), 'LT(%1, %2)', []),
 	'TO()': new Keycode(new Template(['TO', 'LAYER'], 'TO(%1)'), 'TO(%1)', []),
 	'MO()': new Keycode(new Template(['MO', 'LAYER'], 'MO(%1)'), 'MO(%1)', []),
+    'TT()': new Keycode(new Template(['TT', 'LAYER'], 'TT(%1)'), 'TT(%1)', []),
 	'DF()': new Keycode(new Template(['DF', 'LAYER'], 'DF(%1)'), 'DF(%1)', []),
 	'TG()': new Keycode(new Template(['TG', 'LAYER'], 'TG(%1)'), 'TG(%1)', []),
 	'OSL()': new Keycode(new Template(['OSL', 'LAYER'], 'OSL(%1)'), 'OSL(%1)', []),
@@ -409,7 +419,7 @@ const categories = {
 
 		'KC_MINS', 'KC_EQL', 'KC_LBRC', 'KC_RBRC', 'KC_BSLS', 'KC_SCLN', 'KC_QUOT', 'KC_GRV', 'KC_COMM', 'KC_DOT', 'KC_SLSH', '',
 
-		'KC_ENT', 'KC_ESC', 'KC_BSPC', 'KC_TAB', 'KC_SPC', 'KC_CAPS', 'KC_APP', '',
+		'KC_ENT', 'KC_ESC', 'KC_GESC', 'KC_BSPC', 'KC_TAB', 'KC_SPC', 'KC_CAPS', 'KC_APP', '',
 
 		'KC_LCTL', 'KC_LSFT', 'KC_LALT', 'KC_LGUI', 'KC_RCTL', 'KC_RSFT', 'KC_RALT', 'KC_RGUI', '',
 
@@ -428,7 +438,9 @@ const categories = {
 
 		'KC_INS', 'KC_DEL', 'KC_HOME', 'KC_END', 'KC_PGUP', 'KC_PGDN', 'KC_LEFT', 'KC_DOWN', 'KC_UP', 'KC_RGHT', '',
 
-		'KC_PWR', 'KC_SLEP', 'KC_WAKE', 'KC_MUTE', 'KC_VOLD', 'KC_VOLU', 'KC_MPLY', 'KC_MSTP', 'KC_MPRV', 'KC_MNXT'
+		'KC_PWR', 'KC_SLEP', 'KC_WAKE', 'KC_MUTE', 'KC_VOLD', 'KC_VOLU', 'KC_MPLY', 'KC_MSTP', 'KC_MPRV', 'KC_MNXT', '',
+        
+        'KC_COPY', 'KC_PAST', 'KC_MENU', 'KC_EXECUTE', 'KC_LSPO', 'KC_RSPC'
 	],
 
 	'KEYPAD': [
@@ -442,13 +454,19 @@ const categories = {
 
 		'RGB_TOG', 'RGB_MOD', 'RGB_HUI', 'RGB_HUD', 'RGB_SAI', 'RGB_SAD', 'RGB_VAI', 'RGB_VAD'
 	],
+    
+    'OSX': [
+		'KC_MFFD', 'KC_MRWD', 'KC_POWER'
+	],
 
 	'FN': [
 		'LCTL()', 'LSFT()', 'LALT()', 'LGUI()', 'RCTL()', 'RSFT()', 'RALT()', 'RGUI()', 'HYPR()', 'MEH()', 'LCAG()', 'ALTG()', '',
 
-		'LT()', 'TO()', 'MO()', 'DF()', 'TG()', 'OSL()', 'OSM()', 'MT()', '',
+		'LT()', 'TO()', 'MO()', 'TT()', 'DF()', 'TG()', 'OSL()', 'OSM()', 'MT()', '',
 
 		'CTL_T()', 'SFT_T()', 'ALT_T()', 'GUI_T()', 'C_S_T()', 'MEH_T()', 'LCAG_T()', 'ALL_T()', '',
+        
+        'CTL_T()', 'SFT_T()', 'ALT_T()', 'GUI_T()', 'C_S_T()', 'MEH_T()', 'LCAG_T()', 'ALL_T()', '',
 
 		'M()'
 	]
@@ -473,6 +491,7 @@ const numbers = {
 	19:  'KC_PAUS',
 	20:  'KC_CAPS',
 	27:  'KC_ESC',
+    28:  'KC_GESC',
 	32:  'KC_SPC',
 	33:  'KC_PGUP',
 	34:  'KC_PGDN',

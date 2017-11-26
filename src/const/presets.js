@@ -11,5 +11,8 @@ module.exports = {
 	'jd45-default': 'JD45',
 	'bantam-pcb': 'Bantam44 (PCB)',
 	'alps44': 'Alps44',
-	'miuni32-rgb-standard': 'Miuni32 RGB (Standard)'
+	'miuni32-rgb-standard': 'Miuni32 RGB (Standard)',
+    'mm2ortho': 'Mechmini 2 (Ortho)',
+    'mm2625space': 'Mechmini 2 (Staggered - 6.25u)',
+    'mm2splitspace': 'Mechmini 2 (Staggered - Split Space)'
 };
