@@ -1,5 +1,11 @@
 # Keyboard Firmware Builder
 
+## Where did kbfirmware.com go?
+
+Due to a lack of users, as of 13 March 2021, kbfirmware.com has been shut down. Thank you for all the support while the project was active!
+
+Rest in Peace, kbfirmware.com: 9 January 2017 - 13 March 2021
+
 ## Setup
 
 To set up the project for development, run `npm install` in the root of the project to install dependencies.
