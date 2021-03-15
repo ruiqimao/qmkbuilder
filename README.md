@@ -1,10 +1,10 @@
 # Keyboard Firmware Builder
 
-## Where did kbfirmware.com go?
+## Life Support
 
-Due to a lack of users, as of 13 March 2021, kbfirmware.com has been shut down. Thank you for all the support while the project was active!
+On 13 March 2021, kbfirmware.com was shut down due to a lack of users, but has been brought back online after additional consideration.
 
-Rest in Peace, kbfirmware.com: 9 January 2017 - 13 March 2021
+However, it should be considered end of life, as there will be no additional development and **may stop working at any time**.
 
 ### Docker Image
 
