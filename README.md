@@ -6,6 +6,12 @@ Due to a lack of users, as of 13 March 2021, kbfirmware.com has been shut down. 
 
 Rest in Peace, kbfirmware.com: 9 January 2017 - 13 March 2021
 
+### Docker Image
+
+The latest image of kbfirmware.com is available as a Docker image, available at https://hub.docker.com/repository/docker/ruiqimao/kbfirmware.
+
+By default, this image will use port 80. To use any other port, expose and set the `PORT` environment variable accordingly.
+
 ## Setup
 
 To set up the project for development, run `npm install` in the root of the project to install dependencies.
