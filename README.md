@@ -30,3 +30,7 @@ To compile, run `npm run build`.
 ## Deploying
 
 To deploy a production version of the application, run `npm run deploy`.
+
+## License
+
+Keyboard Firmware Builder is under the GNU GPL v3 license. The license information for QMK Firmware can be found at https://qmk.fm/license/.
