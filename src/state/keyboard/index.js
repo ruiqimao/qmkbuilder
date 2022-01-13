@@ -38,6 +38,8 @@ class Keyboard {
 		this.settings = {
 			diodeDirection: C.DIODE_COL2ROW,
 			name: '',
+			vendor_id: C.VENDOR_ID,
+			product_id: C.PRODUCT_ID,
 			bootloaderSize: C.BOOTLOADER_4096,
 			rgbNum: 0,
 			backlightLevels: 3

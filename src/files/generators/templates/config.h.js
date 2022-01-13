@@ -6,8 +6,8 @@ module.exports = `
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x6060
+#define VENDOR_ID       0x%vendor_id%
+#define PRODUCT_ID      0x%product_id%
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    qmkbuilder
 #define PRODUCT         keyboard

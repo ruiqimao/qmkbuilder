@@ -77,6 +77,26 @@ class Settings extends React.Component {
 				Give your layout a name!
 			</Help>
 			<div style={{ height: '0.5rem' }}/>
+			<h2 style={{ width: '8rem', marginRight: '0.8rem' }}>VENDOR ID</h2>
+			0x <input
+				style={{ width: '7rem' }}
+				type='text'
+				value={ keyboard.settings.vendor_id }
+				onChange={ e => keyboard.setSetting('vendor_id', e.target.value) }/>
+			<Help>
+				Give your vendor id!
+			</Help>
+			<div style={{ height: '0.5rem' }}/>
+			<h2 style={{ width: '8rem', marginRight: '0.8rem' }}>PRODUCT ID</h2>
+			0x <input
+				style={{ width: '7rem' }}
+				type='text'
+				value={ keyboard.settings.product_id }
+				onChange={ e => keyboard.setSetting('product_id', e.target.value) }/>
+			<Help>
+				Give your product id!
+			</Help>
+			<div style={{ height: '0.5rem' }}/>
 			<h2 style={{ width: '8rem', marginRight: '0.8rem' }}>Bootloader Size</h2>
 			<select
 				style={{ width: '8rem' }}
