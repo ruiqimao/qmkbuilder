@@ -487,6 +487,9 @@ class Keyboard {
 		keyboard.quantum = quantum;
 		keyboard.settings = settings;
 
+		if (!keyboard.settings.vendor_id) keyboard.settings.vendor_id = C.VENDOR_ID;
+		if (!keyboard.settings.product_id) keyboard.settings.product_id = C.PRODUCT_ID;
+
 		keyboard.updateWiring();
 		keyboard.updatePins();
 		keyboard.verify();
