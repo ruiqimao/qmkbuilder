@@ -352,6 +352,10 @@ class Keyboard {
 		if (!overlappingPins) {
 			this.errors.push('There are overlapping pins.');
 		}
+		if(this._controller == C.CONTROLLER_BLACKPILLV3 && this.pins.row.some(p => (['C13', 'C14', 'C15']).includes(p)))
+		{
+			this.errors.push('C13 C14 C15 can not be used as row pins');
+		}
 
 		// Check to see if there are all the recommended keys in the keymap.
 		const inKeymap = new Set();

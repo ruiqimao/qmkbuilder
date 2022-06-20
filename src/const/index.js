@@ -35,6 +35,7 @@ const C = {
 	CONTROLLER_ATMEGA32U2: 0,
 	CONTROLLER_ATMEGA32U4: 1,
 	CONTROLLER_AT90USB1286: 2,
+	CONTROLLER_BLACKPILLV3: 3,
 
 	// Pins.
 	PINS: {
@@ -57,7 +58,13 @@ const C = {
 			'D0', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7',
 			'E0', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7',
 			'F0', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7'
-		]
+		],
+		3: [ //CONTROLLER_BLACKPILLV3
+			'A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7',
+			'A8', 'A15', 'B0', 'B1', 'B3', 'B4', 'B5', 'B6',
+			'B7', 'B10', 'B12', 'B13', 'B14', 'B15', 'C13',
+			'C14', 'C15'
+		]	
 	},
 
 	// Keycodes.
