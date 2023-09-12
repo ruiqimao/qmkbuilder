@@ -11,6 +11,7 @@ module.exports = {
 	's60x-rgb-ansi': 'S60-X RGB (ANSI)',
 	's60x-rgb-iso': 'S60-X RGB (ISO)',
 	's60x-rgb-generic': 'S60-X RGB (Generic)',
+	'atreus': 'Atreus',
 	'planck': 'Planck',
 	'jd45-default': 'JD45',
 	'bantam-pcb': 'Bantam44 (PCB)',
