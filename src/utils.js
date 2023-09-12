@@ -107,6 +107,21 @@ class Utils {
 		return input;
 	}
 
+	/**
+	 * Counts the number of truthy values in arr.
+	 * @param {Array} arr The array to count.
+	 * @return {Number} The number of truthy values in arr.
+	 */
+	static countTruthy(arr) {
+		return arr.reduce((count, value) => {
+			if (value) {
+				return count + 1;
+			} else {
+				return count;
+			}
+		}, 0);
+	}
+
 }
 
 module.exports = Utils;

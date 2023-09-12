@@ -22,10 +22,10 @@ class Key {
 
 		this.selected = 0;
 
-		this.keycodes = Array(C.KEYMAP_MAX_LAYERS).fill(new Keycode('KC_TRNS', []));
+		this.keycodes = new Array(C.KEYMAP_MAX_LAYERS);
 
 		// Bind functions.
-		this.guessLegend = this.guessLegend.bind(this);
+		this.guessKeycodes = this.guessKeycodes.bind(this);
 		this.select = this.select.bind(this);
 		this.serialize = this.serialize.bind(this);
 
@@ -105,7 +105,7 @@ class Key {
 		this._col = 0;
 
 		// Guess the legend.
-		this.guessLegend();
+		this.guessKeycodes();
 	}
 
 	/*
@@ -127,20 +127,83 @@ class Key {
 	}
 
 	/*
-	 * Guess the legend of the key.
+	 * Guess the keycode of the key using the key's legends and the current legend-to-layer map.
 	 */
-	guessLegend() {
-		// Get the last legend.
-		const legends = this.legend.split('\n');
-		const legend = legends[legends.length - 1];
+	guessKeycodes() {
+		/*
+		 No legends = SPACE on l0 and TRNS on others
+		 Only one legend = assign l0, TRNS on others
+		 No base layer legend but multiple higher layer legends = SPACE on l0, TRNS where unspecified
+		 Others = TRNS where unspecified
 
-		// Look for an alias.
+		 Alternative strict mode:
+		 If legend unspecified = NO on base layer, TRNS elsewhere
+
+		 This allows for keys that are inactive on the base layer but SPACE needs to be specified explicitly.
+		*/
+
+		this.keycodes.fill(new Keycode('KC_TRNS', []));
+
+		const strictMode = this.keyboard.settings.strictLayers;
+
+		const legends = this.legend.split('\n');
+
+		const indexToLayer = this.keyboard.settings.positionIndexToLayerMap;
+		const isLayerMapDefined = indexToLayer.some(v => { return v != undefined });
+
+		// Simple case with zero or one legends or default behavior with no layer map.
+		if (!isLayerMapDefined || Utils.countTruthy(legends) <= 1) {
+			const legend = legends[legends.length - 1];
+			this.keycodes[0] = Key.legendToKeycode(legend, 'KC_NO');
+			return;
+		}
+
+		// layers has the same elements as legends but in such an order that the index of a legend is equal to the
+		// layer it is to be assigned to.
+		const layers = [];
+		for (let i = 0; i < legends.length; i++) {
+			const layer = indexToLayer[i];
+			if (layer != undefined) {
+				layers[layer] = legends[i];
+			}
+		}
+
+		// Base layer, using 'KC_NO' as a fallback.
+		const legend = layers[0];
+		if (legend) {
+			this.keycodes[0] = Key.legendToKeycode(legend, 'KC_NO');
+		} else {
+			if (strictMode) {
+				this.keycodes[0] = new Keycode('KC_NO', []);
+			} else {
+				// Assign SPACE if blank.
+				this.keycodes[0] = new Keycode('KC_SPC', []);
+			}
+		}
+
+		// Higher layers, using 'KC_TRNS' as a fallback.
+		for (let i = 1; i < layers.length; i++) {
+			const legend = layers[i];
+			if (legend) {
+				this.keycodes[i] = Key.legendToKeycode(legend, 'KC_TRNS');
+			}
+		}
+	}
+
+	/**
+	 * Returns a new keycode object corresponding to legend, or if no such keycode can be found, one corresponsing to
+	 * fallback.
+	 *
+	 * @param {String} legend The legend to which a keycode should be found.
+	 * @param {String} fallback A string specifing the fallback keycode (e.g. 'KC_NO' or 'KC_TRNS').
+	 * @return {Keycode} The newly constructed keycode.
+	 */
+	static legendToKeycode(legend, fallback) {
 		const keycode = C.KEYCODE_ALIASES[legend.toUpperCase()];
 		if (keycode) {
-			this.keycodes[0] = new Keycode(keycode.template.raw[0], []);
+			return new Keycode(keycode.template.raw[0], []);
 		} else {
-			// Default to KC_NO.
-			this.keycodes[0] = new Keycode('KC_NO', []);
+			return new Keycode(fallback, []);
 		}
 	}
 

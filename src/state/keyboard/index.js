@@ -40,7 +40,9 @@ class Keyboard {
 			name: '',
 			bootloaderSize: C.BOOTLOADER_4096,
 			rgbNum: 0,
-			backlightLevels: 3
+			backlightLevels: 3,
+			positionIndexToLayerMap: [],
+			strictLayers: false
 		};
 
 		this.valid = false;
@@ -64,6 +66,10 @@ class Keyboard {
 		this.serialize = this.serialize.bind(this);
 
 		this.deselect = this.deselect.bind(this);
+
+		this.setLayer = this.setLayer.bind(this);
+		this.getLayer = this.getLayer.bind(this);
+		this.updateLayers = this.updateLayers.bind(this);
 
 		// Import KLE if it exists.
 		if (json) this.importKLE(json);
@@ -406,6 +412,50 @@ class Keyboard {
 		this.settings[id] = value;
 
 		// Update the state.
+		this.state.update();
+	}
+
+	/**
+	 * Gets the layer the supplied position is currently mapped to.
+	 * @param {String} position The position for which the layer should be retrieved.
+	 * @return {*} The layer the position is mapped to or the empty string if the position is not mapped.
+	 */
+	getLayer(position) {
+		const positionIndex = C.POSITION_TO_INDEX[position];
+		const layer = this.settings.positionIndexToLayerMap[positionIndex];
+		if (layer != undefined) {
+			return layer;
+		} else {
+			return '';
+		}
+	}
+
+	/**
+	 * Maps the supplied legend position to the supplied layer.
+	 *
+	 * @param {String} position The legend position to be mapped.
+	 * @param {Number} layer The layer the position should be mapped to.
+	 */
+	setLayer(position, layer) {
+		const positionIndex = C.POSITION_TO_INDEX[position];
+		if (isNaN(layer)) {
+			this.settings.positionIndexToLayerMap[positionIndex] = undefined;
+		} else {
+			this.settings.positionIndexToLayerMap[positionIndex] = layer;
+		}
+
+		this.state.update();
+	}
+
+	/**
+	 * Regenerates all keycodes according to key legends and verifies this keyboard.
+	 */
+	updateLayers() {
+		for (const key of this.keys) {
+			key.guessKeycodes();
+		}
+		this.verify();
+
 		this.state.update();
 	}
 
