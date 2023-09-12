@@ -6,6 +6,7 @@ const C = require('const');
 const Utils = require('utils');
 
 const Request = require('superagent');
+const queryString = require("query-string");
 
 class Main extends React.Component {
 
@@ -16,6 +17,7 @@ class Main extends React.Component {
 		this.upload = this.upload.bind(this);
 		this.useKLE = this.useKLE.bind(this);
 		this.usePreset = this.usePreset.bind(this);
+		this.useGist = this.useGist.bind(this);
 	}
 
 	/*
@@ -106,6 +108,60 @@ class Main extends React.Component {
 					state.error('Invalid configuration');
 				}
 			});
+	}
+
+	/*
+	 * Use a GitHub Gist.
+	 *
+	 * @param {String} id The id of the Gist.
+	 */
+	useGist(id) {
+		const state = this.props.state;
+
+		Request
+			.get('https://api.github.com/gists/' + id)
+			.end((err, res) => {
+				if (err) return state.error('Unable to load preset.');
+
+				try {
+					// Get files in gist
+					const files = res.body.files;
+
+					// Get the contents of the first file
+					const serialized = files[Object.keys(files)[0]].content;
+
+					// Deserialize the contents.
+					const deserialized = JSON.parse(serialized);
+
+					// Ensure the version is correct.
+					if (deserialized.version !== C.VERSION) throw 'version mismatch';
+
+					// Build a new keyboard.
+					const keyboard = Keyboard.deserialize(state, deserialized.keyboard);
+
+					state.update({
+						keyboard: keyboard,
+						screen: C.SCREEN_KEYMAP // Switch to the keymap screen.
+					});
+				} catch (e) {
+					console.error(e);
+					state.error('Invalid configuration');
+				}
+			});
+	}
+
+	componentDidMount() {
+		// Check for GitHub Gist to load preset from
+		const parsedQueryString = queryString.parse(location.search);
+		const gist = parsedQueryString.gist;
+
+		if (gist) {
+			// Validate that the gist id is a valid hash
+			if (/^[A-Za-z0-9]+$/.test(gist)) {
+				// Fetch the gist
+				this.useGist(gist);
+			}
+		}
 	}
 
 	render() {
