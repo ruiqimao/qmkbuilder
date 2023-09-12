@@ -10,6 +10,8 @@ class ConfigH extends Generator {
 		const keyboard = this.keyboard;
 
 		return {
+			'vendor_id': (keyboard.settings.vendor_id) ? keyboard.settings.vendor_id: C.VENDOR_ID,
+			'product_id': (keyboard.settings.product_id) ? keyboard.settings.product_id: C.PRODUCT_ID,
 			'rows': keyboard.rows,
 			'cols': keyboard.cols,
 			'row_pins': keyboard.pins.row.join(', '),
