@@ -1,8 +1,9 @@
 const Express = require('express');
 const BodyParser = require('body-parser');
 const Crypto = require('crypto');
-const Exec = require('child_process').exec;
+const ExecFile = require('child_process').execFile;
 const Fs = require('fs');
+const Path = require('path');
 
 const co = require('co');
 
@@ -46,8 +47,10 @@ app.post('/build', (req, res) => {
   const tmpdir = envTMP + key;
 
 	// Setup helper functions.
+	// Use execFile so that arguments are passed directly to the program and are
+	// never interpreted by a shell (no command injection through QMK/TMP values).
 	const clean = () => {
-		Exec('rm -rf ' + tmpdir);
+		ExecFile('rm', ['-rf', tmpdir]);
 	};
 
 	const sendError = err => {
@@ -61,7 +64,7 @@ app.post('/build', (req, res) => {
 
 		// Copy the base stencil.
 		yield new Promise((resolve, reject) => {
-			Exec('cp -rp ' + envQMK + ' ' + tmpdir, (err, stdout, stderr) => {
+			ExecFile('cp', ['-rp', envQMK, tmpdir], (err, stdout, stderr) => {
 				if (err) return reject('Failed to initialize.');
 				resolve();
 			});
@@ -70,7 +73,11 @@ app.post('/build', (req, res) => {
 		// Copy all the files.
 		for (const file in files) {
 			yield new Promise((resolve, reject) => {
-				const fileName = file.replace('qmk_firmware', tmpdir);
+				const fileName = Path.resolve(file.replace('qmk_firmware', tmpdir));
+				const safeRoot = Path.resolve(tmpdir) + Path.sep;
+				if (fileName.indexOf(safeRoot) !== 0) {
+					return reject('Failed to initialize.');
+				}
 				Fs.writeFile(fileName, files[file], err => {
 					if (err) return reject('Failed to initialize.');
 					resolve();
@@ -80,7 +87,7 @@ app.post('/build', (req, res) => {
 
 		// Make.
 		yield new Promise((resolve, reject) => {
-			Exec('cd ' + tmpdir + '/keyboards/kb && make', (err, stdout, stderr) => {
+			ExecFile('make', [], { cwd: tmpdir + '/keyboards/kb' }, (err, stdout, stderr) => {
 				if (err) return reject(stderr);
 				resolve();
 			});
